@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script src="Js/script.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="CSS/index.css">
+    <title>Food Bite</title>
+</head>
+<body>
+
+    <button onclick="topFunction()" id="myScrollButton" title="Go to top">Top</button>
+
+    <!-- Start Main Class -->
+    <div class="main">
+        
+        <!-- Start Header -->                
+        <div id="header-section">
+        </div>
+        <!-- End Header -->
+        
+        <!-- Start Content -->
+        <div class="content">
+            
+            <!-- Start Header -->
+            <header id="contact" class="header-title">
+                <h1><b>Recipe Details</b></h1>
+                <hr class="line-style">    
+                <br>
+            </header>
+            <!-- End Header -->
+            
+            <div class="form-container">
+                <div id="recipe"></div>
+                <br>
+                <h3 class="home-title" style="color: #B90A0A;">
+                    Like this Recipe: <i onclick="myLikeFunction(this)" class="fa fa-thumbs-up"></i>
+
+                </h3>
+            </div>
+            <br>
+            
+
+        </div>
+        <!-- End Content -->
+
+    </div>
+    <!-- End Main Class -->
+
+    <!-- Start Footer -->                
+    <div id="footer_section">
+    </div>
+    <!-- End Footer -->
+    
+    <script>
+        $(function() {
+            $("#header-section").load("Header.html"); 
+            $("#footer_section").load("Footer.html"); 
+        });
+
+        function myLikeFunction(x) {
+            x.classList.toggle("fa-thumbs-down");
+        }
+
+        //Get the button
+        var mybutton = document.getElementById("myScrollButton");
+        
+        // When the user scrolls down 20px from the top of the document, show the button
+        window.onscroll = function() {scrollFunction()};
+        
+        function scrollFunction() {
+          if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            mybutton.style.display = "block";
+          } else {
+            mybutton.style.display = "none";
+          }
+        }
+        
+        // When the user clicks on the button, scroll to the top of the document
+        function topFunction() {
+          document.body.scrollTop = 0;
+          document.documentElement.scrollTop = 0;
+        }
+        
+        //--------Recipe Content------------------------
+        var parameters = location.search.substring(1).split("&");
+        var temp = parameters[0].split("=");
+        var temp2 = parameters[1].split("=");
+        var id = temp[1];
+        var cat = temp2[1];
+        if(cat == "breakfast"){
+            var codeBlock = "";
+            for(let i = 0;i < breakfastItem.length;i++){
+                if(breakfastItem[i].id == id && cat == "breakfast"){
+                    codeBlock = 
+                    `
+                        <h1 class="header-title">${breakfastItem[i].name}</h1>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-16">
+                                <div class="flip-card-recipe">
+                                    <div class="flip-card-inner">
+                                        <div class="flip-card-front">
+                                            <img src="Images\\${breakfastItem[i].image}" alt="Breakfast" style="width:820px;height:350px;" class="card">
+                                        </div>
+                                        <div class="flip-card-back">
+                                            <h3>${breakfastItem[i].name}</h3> 
+                                            <p>${breakfastItem[i].description}</p> 
+                                            <p>Category:: ${cat}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <h3 class="home-title" style="color: #B90A0A;">
+                            Ingredients:
+                        </h3>  
+                        <br>
+                        <p>
+                            ${breakfastItem[i].ingredients}
+                        </p>
+                        <br>   
+                        <h3 class="home-title" style="color: #B90A0A;">
+                            Instructions:
+                        </h3>         
+                        <br>
+                        <p>
+                            ${breakfastItem[i].instruction1}
+                        </p>
+                        <p>
+                            ${breakfastItem[i].instruction2}
+                        </p>
+                        <p>
+                            ${breakfastItem[i].instruction3}
+                        </p>
+
+                    `;
+                }
+            }
+            document.getElementById("recipe").innerHTML = codeBlock;
+    } 
+
+    else if(cat == "lunch"){
+            var codeBlock = "";
+            for(let i = 0;i < lunchItem.length;i++){
+                if(lunchItem[i].id == id && cat == "lunch"){
+                    codeBlock = 
+                    `
+                        <h1 class="header-title">${lunchItem[i].name}</h1>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-16">
+                                <div class="flip-card-recipe">
+                                    <div class="flip-card-inner">
+                                        <div class="flip-card-front">
+                                            <img src="Images\\${lunchItem[i].image}" alt="Breakfast" style="width:820px;height:350px;" class="card">
+                                        </div>
+                                        <div class="flip-card-back">
+                                            <h3>${lunchItem[i].name}</h3> 
+                                            <p>${lunchItem[i].description}</p> 
+                                            <p>Category:: ${cat}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <h3 class="home-title" style="color: #B90A0A;">
+                            Ingredients:
+                        </h3>  
+                        <br>
+                        <p>
+                            ${lunchItem[i].ingredients}
+                        </p>
+                        <br>   
+                        <h3 class="home-title" style="color: #B90A0A;">
+                            Instructions:
+                        </h3>         
+                        <br>
+                        <p>
+                            ${lunchItem[i].instruction1}
+                        </p>
+                        <p>
+                            ${lunchItem[i].instruction2}
+                        </p>
+                        <p>
+                            ${lunchItem[i].instruction3}
+                        </p>
+
+                    `;
+                }
+            }
+            document.getElementById("recipe").innerHTML = codeBlock;
+    } 
+    else if(cat == "dinner"){
+            var codeBlock = "";
+            for(let i = 0;i < dinnerItem.length;i++){
+                if(dinnerItem[i].id == id && cat == "dinner"){
+                    codeBlock = 
+                    `
+                        <h1 class="header-title">${dinnerItem[i].name}</h1>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-16">
+                                <div class="flip-card-recipe">
+                                    <div class="flip-card-inner">
+                                        <div class="flip-card-front">
+                                            <img src="Images\\${dinnerItem[i].image}" alt="Breakfast" style="width:820px;height:350px;" class="card">
+                                        </div>
+                                        <div class="flip-card-back">
+                                            <h3>${dinnerItem[i].name}</h3> 
+                                            <p>${dinnerItem[i].description}</p> 
+                                            <p>Category:: ${cat}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <h3 class="home-title" style="color: #B90A0A;">
+                            Ingredients:
+                        </h3>  
+                        <br>
+                        <p>
+                            ${dinnerItem[i].ingredients}
+                        </p>
+                        <br>   
+                        <h3 class="home-title" style="color: #B90A0A;">
+                            Instructions:
+                        </h3>         
+                        <br>
+                        <p>
+                            ${dinnerItem[i].instruction1}
+                        </p>
+                        <p>
+                            ${dinnerItem[i].instruction2}
+                        </p>
+                        <p>
+                            ${dinnerItem[i].instruction3}
+                        </p>
+
+                    `;
+                }
+            }
+            document.getElementById("recipe").innerHTML = codeBlock;
+    } 
+    else if(cat == "dessert"){
+            var codeBlock = "";
+            for(let i = 0;i < dessertItem.length;i++){
+                if(dessertItem[i].id == id && cat == "dessert"){
+                    codeBlock = 
+                    `
+                        <h1 class="header-title">${dessertItem[i].name}</h1>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-16">
+                                <div class="flip-card-recipe">
+                                    <div class="flip-card-inner">
+                                        <div class="flip-card-front">
+                                            <img src="Images\\${dessertItem[i].image}" alt="Breakfast" style="width:820px;height:350px;" class="card">
+                                        </div>
+                                        <div class="flip-card-back">
+                                            <h3>${dessertItem[i].name}</h3> 
+                                            <p>${dessertItem[i].description}</p> 
+                                            <p>Mouthwatering unique food combinations.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <h3 class="home-title" style="color: #B90A0A;">
+                            Ingredients:
+                        </h3>  
+                        <br>
+                        <p>
+                            ${dessertItem[i].ingredients}
+                        </p>
+                        <br>   
+                        <h3 class="home-title" style="color: #B90A0A;">
+                            Instructions:
+                        </h3>         
+                        <br>
+                        <p>
+                            ${dessertItem[i].instruction1}
+                        </p>
+                        <p>
+                            ${dessertItem[i].instruction2}
+                        </p>
+                        <p>
+                            ${dessertItem[i].instruction3}
+                        </p>
+
+                    `;
+                }
+            }
+            document.getElementById("recipe").innerHTML = codeBlock;
+    } 
+        
+    </script>
+
+</body>
+</html>
