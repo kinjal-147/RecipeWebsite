@@ -579,3 +579,17 @@ h3 > .fa {
 h3 > .fa:hover {
     color: #4F0404;
 }
+
+.searchContainer {
+    display: flex;
+    width:100%;
+    padding-right: 50px;
+}
+.searchButton{
+    flex:1;
+    padding-top: 10px;
+    
+}
+.titleReceipe{
+    flex:3;
+}
