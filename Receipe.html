@@ -35,10 +35,10 @@
                 <div class="searchContainer">
                     <div class="titleReceipe"><h1><b>Receipe</b></h1></div>
                     <div class="searchButton">
-                        <form action="">
+                        <form action="/Project/search.html">
                             <table>
                                 <tr>
-                                    <td><input type="text" placeholder="Search.." name="search"></td>
+                                    <td><input type="text" placeholder="Search.." name="search" id="searchText"></td>
                                     <td><button type="submit"><i class="fa fa-search"></i></button></td>
                                 </tr>
                             </table>
@@ -50,10 +50,12 @@
                 <br>
             </header>
             <!-- End Header -->
-
+          
+               
             <!-- Start Breakfast Receipe -->
             <div class="form-container">
                 <center>
+
 
                     <!-- Title -->    
                     <h3 class="home-title" style="color: #B90A0A;">
@@ -137,8 +139,9 @@
                 <div id="dessertContainer"></div>     
             </div>
             <br><br>
-            <!-- End Dessert Receipe -->
-
+            <!-- End Dessert Receipe -->`}
+           
+        </script>
         </div>
         <!-- End Content -->
 
@@ -175,7 +178,9 @@
           document.body.scrollTop = 0;
           document.documentElement.scrollTop = 0;
         }
-
+        
+        // }
+           
         //-------------------Breakfast Section---------------------------
         var breakfastCode = "";
         for(let i = 0;i < breakfastItem.length;i+=2){
@@ -298,6 +303,9 @@
             `
         }
         document.getElementById("dessertContainer").innerHTML = dessertCode;
+     
+
+        
     </script>
     
 </body>

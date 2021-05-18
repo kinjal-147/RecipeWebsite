@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+        <script src="Js/script.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="CSS/index.css">
+        <title>Food Bite</title>
+    </head>
+<body>
+    <button onclick="topFunction()" id="myScrollButton" title="Go to top">Top</button>
+
+    <!-- Start Main Class -->
+    <div class="main">
+        
+        <!-- Start Header -->                
+        <div id="header-section">
+        </div>
+        <!-- End Header -->
+        
+        <!-- Start Content -->
+        <div class="content">
+            
+            <!-- Start Header -->
+            <header id="contact" class="header-title">
+                <div class="searchContainer">
+                    <div class="titleReceipe"><h1><b>Receipe</b></h1></div>
+                    <div class="searchButton">
+                        <form>
+                            <table>
+                                <tr>
+                                    <td><input type="text" placeholder="Search.." name="search" id="searchText"></td>
+                                    <td><button type="submit"><i class="fa fa-search"></i></button></td>
+                                </tr>
+                            </table>
+                        </form>
+                    </div>
+                </div>
+                
+                <hr class="line-style">    
+                <br>
+            </header>
+            <!-- End Header -->
+            <div id="mainContainer"></div>
+            <script>
+                var parameters = location.search.substring(1);
+                var temp = parameters.split("=");
+                var searchName = temp[1];
+                console.log(searchName);
+                var searchItem = [];
+               
+                for(var i=0;i<breakfastItem.length;i++){
+                
+                    var ingArray = breakfastItem[i].ing;
+                   
+                    for(var j=0;j<ingArray.length;j++){
+                        if(searchName == ingArray[j]){
+                           searchItem.push(breakfastItem[i].id);
+                        }
+                        else{
+                            console.log("No data found");
+                        }
+                    }
+                }
+                var recipeBlock = "";
+                if(searchName){
+                   recipeBlock = recipeBlock +
+                 `<!-- Start search Receipe -->
+            <div class="form-container">
+                <center>
+
+                    <!-- Title -->    
+                    <!-- <h3 class="home-title" style="color: #B90A0A;">
+                        Recipe
+                    </h3> -->
+                    <h1 class="home2-title">R E C I P E S</h1>
+                    
+                    <!-- Circle Line -->
+                    <div class="home-line">
+                        <div class="home-circle-line"></div>
+                        <span><i>&#10038;</i></span>
+                    </div>
+
+                </center>
+                <div id="searchRecipeContainer"></div>
+                </div>
+            <br><br>
+            <!-- End search Receipe -->`}
+           
+            document.getElementById("mainContainer").innerHTML = recipeBlock;
+            </script>
+      
+        </div>
+        <!-- End Content -->
+
+    </div>
+    <!-- End Main Class -->
+
+    <!-- Start Footer -->                
+    <div id="footer_section">
+    </div>
+    <!-- End Footer -->
+
+  
+  <script>
+
+        $(function() {
+            $("#header-section").load("Header.html"); 
+            $("#footer_section").load("Footer.html"); 
+        });
+
+        //Get the button
+        var mybutton = document.getElementById("myScrollButton");
+        
+        // When the user scrolls down 20px from the top of the document, show the button
+        window.onscroll = function() {scrollFunction()};
+        
+        function scrollFunction() {
+          if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            mybutton.style.display = "block";
+          } else {
+            mybutton.style.display = "none";
+          }
+        }
+        
+        // When the user clicks on the button, scroll to the top of the document
+        function topFunction() {
+          document.body.scrollTop = 0;
+          document.documentElement.scrollTop = 0;
+        }
+        
+        // }
+            //-------------------Search Section---------------------------
+            var searchCode = "";
+        for(let i = 0;i < breakfastItem.length;i++){
+           
+            for(let j = 0; j < searchItem.length;j++){
+                if(searchItem[j] == breakfastItem[i].id){
+                   
+            searchCode = searchCode + 
+            `
+            <div class="row">
+                    <div class="col-md-3">
+                        <img src="Images\\${breakfastItem[i].image}" alt="Breakfast" style="width:195px;height:120px;" class="receipe-image">
+                    </div>
+                <div class="col-md-3">
+                    <h3>
+                        <a href="Recipe_Detail.html?id=${breakfastItem[i].id}&cat=dessert"  target="_blank" class="receipe">${breakfastItem[i].name}</a>
+                    </h3> 
+                    <p>${breakfastItem[i].description}</p> 
+                </div>    
+                </div>
+                <br>
+            `
+            // console.log(searchCode);
+        }}}
+       console.log("--------------------search code-----------------");
+       console.log(searchCode);
+        document.getElementById("searchRecipeContainer").innerHTML = searchCode;
+
+           
+
+        
+    </script>
+    
+</body>
+</html>
